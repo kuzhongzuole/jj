@@ -1,0 +1,87 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="css/style.css" />
+		<link rel="stylesheet" href="css/iconfont.css" />
+	</head>
+
+	<body>
+		
+		<header class="mui-bar mui-bar-nav ym-title">
+		    <h1 class="mui-title">登录</h1>
+		</header>
+		
+		<div class="mui-content ym-main">
+			<img src="images/logo.png" alt="" id="ym-login"/>
+		    <div class="mui-input-group">
+			    <div class="mui-input-row ym-from">
+			        <label class="ym-item iconfont icon-yonghu"></label>
+			        <input type="text" class="mui-input-clear" placeholder="请输入手机号" name="user">
+			    </div>
+			    <div class="mui-input-row ym-from">
+			        <label class="ym-item iconfont icon-huantumdengluzhuceshoujiyanzhengma"></label>
+			        <input type="password" class="mui-input-password" placeholder="请输入6~16位账户密码" name="pwd">
+			    </div>
+			</div>
+			<ul class="ym-r">
+			    <li id="forget">
+			    	<a href="#">忘记密码？</a>
+			    </li>
+			    <li>
+			    	<button type="button" class="mui-btn mui-btn-success mui-btn-block login-btn" id="login-btn">登录</button>
+			    </li>
+			    <li>
+			        <a href="#" id="picture">注册</a>
+			    </li>
+			</ul>
+		</div>
+		
+		<script src="js/mui.min.js"></script>
+		<script src="js/zepto.js"></script>
+		<script src="js/select_bigplant.js"></script>
+		<script type="text/javascript">
+			mui.init();
+			var picture=document.getElementById("picture");
+			picture.addEventListener("tap",function(){
+				mui.openWindow({
+					url:"register.html",
+					id:"register.html"
+				})
+			});
+			mui('.ym-r').on("tap","button",function(){
+				mui.openWindow({
+					url:"index.html",
+					id:"index.html"
+				})
+			})
+			
+			var forget=document.getElementById("forget");
+			forget.addEventListener("tap",function(){
+				mui.openWindow({
+					url:"forgetpasd.html",
+					id:"forgetpasd"
+				})
+			})
+			document.getElementById("login-btn").addEventListener('tap', function() {
+					mui.back();
+					mui.toast('登录成功');
+					
+					loginWebview.addEventListener('hide', function() {				
+						var cartwebview = plus.webview.getWebviewById('index.html');
+						var minewebview = plus.webview.getWebviewById('my.html');
+						var xinyuandanwebview = plus.webview.getWebviewById('plant.html');
+						mui.fire(cartwebview, 'loginSuccess', {});
+						mui.fire(minewebview, 'loginSuccess', {});
+						mui.fire(xinyuandanwebview, 'loginSuccess', {});
+						loginWebview.close();
+					}, false);
+				}, false);
+		</script>
+	</body>
+
+</html>
